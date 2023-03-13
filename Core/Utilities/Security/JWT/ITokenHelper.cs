@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Utilities.Security.JWT
 {
-    internal interface ITokenHelper
+    public interface ITokenHelper
     {
     }
 }
