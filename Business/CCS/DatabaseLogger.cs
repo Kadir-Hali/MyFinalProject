@@ -1,10 +1,9 @@
-﻿namespace Business.CCS
+﻿namespace Business.CCS;
+
+public class DatabaseLogger : ILogger
 {
-    public class DatabaseLogger : ILogger
+    public void Log()
     {
-        public void Log()
-        {
-            Console.WriteLine("Veritabanına loglandı.");
-        }
+        Console.WriteLine("Veritabanına loglandı.");
     }
 }
