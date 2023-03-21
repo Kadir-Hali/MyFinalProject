@@ -1,12 +1,8 @@
-﻿// See https://aka.ms/new-console-template for more information
-
-using Business.Concrete;
+﻿using Business.Concrete;
 using DataAccess.Concrete.EntityFramework;
-using DataAccess.Concrete.InMemory;
 
 //ProuductTest();
 //CategoryTest();
-
 static void ProuductTest()
 {
     ProductManager productManager = new ProductManager(new EfProductDal(),new CategoryManager(new EfCategoryDal()));
@@ -24,11 +20,7 @@ static void ProuductTest()
     {
         Console.WriteLine(result.Message);
     }
-
-    
 }
-
-
 static void CategoryTest()
 {
     CategoryManager categoryManager = new CategoryManager(new EfCategoryDal());
