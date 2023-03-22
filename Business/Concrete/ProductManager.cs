@@ -3,6 +3,7 @@ using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Transaction;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Business;
 using Core.Utilities.Results;
@@ -23,6 +24,7 @@ public class ProductManager : IProductService
     }
     [SecuredOperation("product.add,admin")]
     [ValidationAspect(typeof(ProductValidator))]
+    [CacheRemoveAspect("IProductService.Get")]
     public IResult Add(Product product)
     {
         IResult result = BusinessRules.Run(CheckIfProductNameExists(product.ProductName),
@@ -71,10 +73,29 @@ public class ProductManager : IProductService
     }
 
     [ValidationAspect(typeof(ProductValidator))]
+    [CacheRemoveAspect("IProductService.Get")]
     public IResult Update(Product product)
     {
+        var result = _productDal.GetAll(p => p.CategoryId == product.CategoryId).Count;
+        if (result >= 10)
+        {
+            return new ErrorResult(Messages.ProductCountOfCategoryError);
+        }
         throw new NotImplementedException();
     }
+
+    [TransactionScopeAspect]
+    public IResult AddTransactionalTest(Product product)
+    {
+        Add(product);
+        if (product.UnitPrice<10)
+        {
+            throw new Exception("");
+        }
+        Add(product);
+        return null;
+    }
+
     private IResult CheckIfProductCountOfCategoryCorrect(int categoryId)
     {
         var result = _productDal.GetAll(p => p.CategoryId == categoryId).Count;
