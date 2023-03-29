@@ -25,7 +25,8 @@ builder.Services.AddCors(options =>
         {
             policy.WithOrigins("http://localhost:4200/").AllowAnyHeader().AllowAnyOrigin();
         });
-});// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+});
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 var tokenOptions = builder.Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
