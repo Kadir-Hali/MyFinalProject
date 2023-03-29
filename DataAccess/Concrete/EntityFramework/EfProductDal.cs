@@ -16,7 +16,7 @@ public class EfProductDal : EfEntityRepositoryBase<Product, NorthwindContext>, I
                     on p.CategoryId equals c.CategoryId
                 select new ProductDetailDto 
                 {
-                    ProductId=p.ProductID,ProductName=p.ProductName,
+                    ProductId=p.ProductId,ProductName=p.ProductName,
                     CategoryName=c.CategoryName,UnitsInStock=p.UnitsInStock 
                 };
             return result.ToList();

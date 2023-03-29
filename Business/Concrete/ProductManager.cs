@@ -41,10 +41,10 @@ public class ProductManager : IProductService
     [CacheAspect]
     public IDataResult<List<Product>> GetAll()
     {
-        if (DateTime.Now.Hour == 12)
-        {
-            return new ErrorDataResult<List<Product>>(Messages.MaintenanceTime);
-        }
+        //if (DateTime.Now.Hour == 12)
+        //{
+        //    return new ErrorDataResult<List<Product>>(Messages.MaintenanceTime);
+        //}
         return new SuccessDataResult<List<Product>>(_productDal.GetAll(), Messages.ProductsListed);
     }
 
@@ -57,7 +57,7 @@ public class ProductManager : IProductService
     [PerformanceAspect(5)]
     public IDataResult<Product> GetById(int productId)
     {
-        return new SuccessDataResult<Product>(_productDal.Get(p => p.ProductID == productId));
+        return new SuccessDataResult<Product>(_productDal.Get(p => p.ProductId == productId));
     }
 
     public IDataResult<List<Product>> GetByUnitPrice(decimal min, decimal max)
