@@ -11,7 +11,7 @@ public class ProductsController : ControllerBase
     //Loosely coupled
     //naming convention
     //IoC Conteiner -- Inversion of Control
-    IProductService _productService;
+    private IProductService _productService;
 
     public ProductsController(IProductService productService)
     {
@@ -29,6 +29,7 @@ public class ProductsController : ControllerBase
         }
         return BadRequest(result);
     }
+
     [HttpGet("getbyid")]
     public IActionResult GetById(int id)
     {
@@ -50,6 +51,7 @@ public class ProductsController : ControllerBase
         }
         return BadRequest(result);
     }
+
     [HttpGet("getbycategory")]
     public IActionResult GetByCategory(int categoryId)
     {

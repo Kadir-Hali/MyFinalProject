@@ -16,13 +16,15 @@ namespace Business.Concrete;
 
 public class ProductManager : IProductService
 {
-    IProductDal _productDal;
-    ICategoryService _categoryService;
+    private IProductDal _productDal;
+    private ICategoryService _categoryService;
+
     public ProductManager(IProductDal productDal, ICategoryService categoryService)
     {
         _productDal = productDal;
         _categoryService = categoryService;
     }
+
     [SecuredOperation("product.add,admin")]
     [ValidationAspect(typeof(ProductValidator))]
     [CacheRemoveAspect("IProductService.Get")]
@@ -90,7 +92,7 @@ public class ProductManager : IProductService
     public IResult AddTransactionalTest(Product product)
     {
         Add(product);
-        if (product.UnitPrice<10)
+        if (product.UnitPrice < 10)
         {
             throw new Exception("");
         }
@@ -107,6 +109,7 @@ public class ProductManager : IProductService
         }
         return new SuccessResult();
     }
+
     private IResult CheckIfCategoryLimitExceded()
     {
         var result = _categoryService.GetAll();
@@ -116,6 +119,7 @@ public class ProductManager : IProductService
         }
         return new SuccessResult();
     }
+
     private IResult CheckIfProductNameExists(string productName)
     {
         var result = _productDal.GetAll(p => p.ProductName == productName).Any();

@@ -8,12 +8,13 @@ namespace Core.CrossCuttingConcerns.Caching.Microsoft;
 public class MemoryCacheManager : ICacheManager
 {
     //Adapter Pattern
-    IMemoryCache _memoryCache;
+    private IMemoryCache _memoryCache;
 
     public MemoryCacheManager()
     {
         _memoryCache = ServiceTool.ServiceProvider.GetService<IMemoryCache>();
     }
+
     public T Get<T>(string key)
     {
         return _memoryCache.Get<T>(key);

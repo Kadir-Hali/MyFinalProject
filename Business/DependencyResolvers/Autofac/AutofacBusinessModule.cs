@@ -33,6 +33,5 @@ public class AutofacBusinessModule : Module
             {
                 Selector = new AspectInterceptorSelector()
             }).SingleInstance();
-
     }
 }

@@ -16,7 +16,6 @@ public class EfEntityRepositoryBase<TEntity, TContext> : IEntityRepository<TEnti
             var addedEntity = context.Entry(entity);
             addedEntity.State = EntityState.Added;
             context.SaveChanges();
-
         }
     }
 
@@ -27,7 +26,6 @@ public class EfEntityRepositoryBase<TEntity, TContext> : IEntityRepository<TEnti
             var deletedEntity = context.Entry(entity);
             deletedEntity.State = EntityState.Deleted;
             context.SaveChanges();
-
         }
     }
 
@@ -56,7 +54,6 @@ public class EfEntityRepositoryBase<TEntity, TContext> : IEntityRepository<TEnti
             var updatedEntity = context.Entry(entity);
             updatedEntity.State = EntityState.Modified;
             context.SaveChanges();
-
         }
     }
 }

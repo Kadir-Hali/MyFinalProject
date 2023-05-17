@@ -5,11 +5,11 @@ using DataAccess.Concrete.EntityFramework;
 //CategoryTest();
 static void ProuductTest()
 {
-    ProductManager productManager = new ProductManager(new EfProductDal(),new CategoryManager(new EfCategoryDal()));
+    ProductManager productManager = new ProductManager(new EfProductDal(), new CategoryManager(new EfCategoryDal()));
 
     var result = productManager.GetProductDetails();
 
-    if (result.Success==true)
+    if (result.Success == true)
     {
         foreach (var product in result.Data)
         {
@@ -27,6 +27,5 @@ static void CategoryTest()
     foreach (var category in categoryManager.GetAll().Data)
     {
         Console.WriteLine(category.CategoryName);
-
     }
 }

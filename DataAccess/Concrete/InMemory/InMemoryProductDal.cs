@@ -7,7 +7,8 @@ namespace DataAccess.Concrete.InMemory;
 
 public class InMemoryProductDal : IProductDal
 {
-    List<Product> _products;
+    private List<Product> _products;
+
     public InMemoryProductDal()
     {
         _products = new List<Product> {
@@ -16,8 +17,9 @@ public class InMemoryProductDal : IProductDal
             new Product{ProductId=3,CategoryId=2,ProductName="Telefon",UnitPrice=1500,UnitsInStock=2},
             new Product{ProductId=4,CategoryId=2,ProductName="Klavye",UnitPrice=150,UnitsInStock=65},
             new Product{ProductId=5,CategoryId=2,ProductName="Fare",UnitPrice=85,UnitsInStock=1}
-        }; 
+        };
     }
+
     public void Add(Product product)
     {
         _products.Add(product);
@@ -28,7 +30,7 @@ public class InMemoryProductDal : IProductDal
         //LINQ - Language Integrated Query
 
         Product productToDelete = _products.SingleOrDefault(p => p.ProductId == product.ProductId);
-        _products.Remove(productToDelete);  
+        _products.Remove(productToDelete);
     }
 
     public Product Get(Expression<Func<Product, bool>> filter)
@@ -48,7 +50,7 @@ public class InMemoryProductDal : IProductDal
 
     public List<Product> GetAllByCategory(int categoryId)
     {
-        return _products.Where(p => p.CategoryId==categoryId).ToList();    
+        return _products.Where(p => p.CategoryId == categoryId).ToList();
     }
 
     public List<ProductDetailDto> GetProductDetails()

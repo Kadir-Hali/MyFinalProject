@@ -6,7 +6,7 @@ namespace Business.Concrete;
 
 public class UserManager : IUserService
 {
-    IUserDal _userDal;
+    private IUserDal _userDal;
 
     public UserManager(IUserDal userDal)
     {
